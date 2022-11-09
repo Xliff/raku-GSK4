@@ -1,7 +1,9 @@
 use v6.c;
 
 use Method::Also;
+use NativeCall;
 
+use GLib::Raw::Traits;
 use GSK::Raw::Types:ver<4>;
 use GSK::Raw::Renderer:ver<4>;
 
@@ -124,8 +126,8 @@ class GSK::Renderer:ver<4> {
 
   method render_texture (
     GskRenderNode()    $root,
-    graphene_rect_t()  $viewport
-                      :$raw      = False
+    graphene_rect_t()  $viewport,
+                      :$raw       = False
   )
     is also<render-texture>
   {

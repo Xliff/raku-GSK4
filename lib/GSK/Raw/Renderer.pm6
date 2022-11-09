@@ -6,6 +6,7 @@ use NativeCall;
 use Cairo;
 use GLib::Raw::Definitions;
 use GLib::Raw::Enums;
+use GLib::Raw::Structs;
 use Graphene::Raw::Definitions;
 use GDK::Raw::Definitions:ver<4>;
 use GSK::Raw::Definitions:ver<4>;
