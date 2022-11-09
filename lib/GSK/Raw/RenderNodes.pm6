@@ -828,34 +828,34 @@ sub gsk_shadow_node_new (
   is      export
 { * }
 
-sub gsk_text_node_get_color (GskRenderNode $node)
+sub gsk_text_node_get_color (GskTextNode $node)
   returns GdkRGBA
   is      native(gsk)
   is      export
 { * }
 
-sub gsk_text_node_get_font (GskRenderNode $node)
+sub gsk_text_node_get_font (GskTextNode $node)
   returns PangoFont
   is      native(gsk)
   is      export
 { * }
 
 sub gsk_text_node_get_glyphs (
-  GskRenderNode $node,
+  GskTextNode $node,
   guint         $n_glyphs is rw
 )
-  returns PangoGlyphInfo
+  returns gpointer # Array of PangoGlyphInfo
   is      native(gsk)
   is      export
 { * }
 
-sub gsk_text_node_get_num_glyphs (GskRenderNode $node)
+sub gsk_text_node_get_num_glyphs (GskTextNode $node)
   returns guint
   is      native(gsk)
   is      export
 { * }
 
-sub gsk_text_node_get_offset (GskRenderNode $node)
+sub gsk_text_node_get_offset (GskTextNode $node)
   returns graphene_point_t
   is      native(gsk)
   is      export
@@ -867,7 +867,7 @@ sub gsk_text_node_get_type
   is      export
 { * }
 
-sub gsk_text_node_has_color_glyphs (GskRenderNode $node)
+sub gsk_text_node_has_color_glyphs (GskTextNode $node)
   returns uint32
   is      native(gsk)
   is      export
@@ -879,7 +879,7 @@ sub gsk_text_node_new (
   GdkRGBA          $color,
   graphene_point_t $offset
 )
-  returns GskRenderNode
+  returns GskTextNode
   is      native(gsk)
   is      export
 { * }
