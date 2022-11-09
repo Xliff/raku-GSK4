@@ -4,6 +4,7 @@ use Method::Also;
 use NativeCall;
 
 use GLib::Raw::Traits;
+use GLib::Bytes;
 use GSK::Raw::Types:ver<4>;
 use GSK::Raw::RenderNodes:ver<4>;
 
@@ -19,7 +20,7 @@ class GSK::RenderNode:ver<4> {
     self.setGskRenderNode($gsk-render-node) if $gsk-render-node;
   }
 
-  method setRenderNode ($render-node is copy) {
+  method setGskRenderNode ($render-node is copy) {
     $render-node = cast(GskRenderNode, $render-node)
       unless $render-node ~~ GskRenderNode;
 
@@ -76,8 +77,12 @@ class GSK::RenderNode:ver<4> {
     self;
   }
 
-  method serialize {
-    gsk_render_node_serialize($!gsk-rn);
+  method serialize ( :$raw = False ) {
+    propReturnObject(
+      gsk_render_node_serialize($!gsk-rn),
+      $raw,
+      |GLib::Bytes.getTypePair
+    );
   }
 
   method unref {
