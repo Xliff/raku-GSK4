@@ -6,6 +6,7 @@ use GIO::Raw::Exports;
 use Graphene::Raw::Exports;
 use GDK::Pixbuf::Raw::Exports;
 use GDK::Raw::Exports:ver<4>;
+use GSK::Raw::Exports:ver<4>;
 
 unit package GDK::Raw::Types:ver<4>;
 
