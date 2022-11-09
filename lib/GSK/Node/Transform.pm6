@@ -1,5 +1,7 @@
 use v6.c;
 
+use Method::Also;
+
 use GSK::Raw::Types:ver<4>;
 use GSK::Raw::RenderNodes:ver<4>;
 
@@ -7,27 +9,72 @@ use GSK::RenderNode:ver<4>;
 
 use GLib::Roles::Implementor;
 
-class GSK::Node::Clip is GSK::RenderNode {
+our subset GskTransformNodeAncestry is export of Mu
+  where GskTransformNode | GskRenderNode;
+
+class GSK::Node::Transform:ver<4> is GSK::RenderNode:ver<4> {
   also does GLib::Roles::Implementor;
 
-  has GskClipNode $!gsk-cn is implementor;
+  has GskTransformNode $!gsk-tn is implementor;
 
+  submethod BUILD ( :$gsk-transform-node ) {
+    self.setGskTransformNode($gsk-transform-node) if $gsk-transform-node
+  }
 
-method transform_node_get_child (GskRenderNode $node) {
-  gsk_transform_node_get_child($node);
-}
+  method setGskTransformNode (GskTransformNodeAncestry $_) {
+    my $to-parent;
 
-method transform_node_get_transform (GskRenderNode $node) {
-  gsk_transform_node_get_transform($node);
-}
+    $!gsk-tn = do {
+      when GskTransformNode {
+        $to-parent = cast(GskRenderNode, $_);
+        $_;
+      }
 
-method transform_node_get_type {
-  gsk_transform_node_get_type();
-}
+      default {
+        $to-parent = $_;
+        cast(GskTransformNode, $_);
+      }
+    }
+    self.setGskRenderNode($to-parent);
+  }
 
-method transform_node_new (
-  GskRenderNode $child,
-  GskTransform  $transform
-) {
-  gsk_transform_node_new($child, $transform);
+  method GSK::Raw::Definitions::GskTransformNode
+    is also<GskTransformNode>
+  { $!gsk-tn }
+
+  multi method new (GskTransformNodeAncestry $gsk-transform-node, :$ref = True) {
+    return unless $gsk-transform-node;
+
+    my $o = self.bless( :$gsk-transform-node );
+    $o.ref if $ref;
+    $o;
+  }
+  multi method new (GskRenderNode() $child, GskTransform() $transform) {
+    my $gsk-transform-node = gsk_transform_node_new($child, $transform);
+
+    $gsk-transform-node ?? self.bless( :$gsk-transform-node ) !! Nil
+  }
+
+  method get_child ( :$raw = False ) is also<get-child> {
+    propReturnObject(
+      gsk_transform_node_get_child($!gsk-tn),
+      $raw,
+      |GSK::RenderNode.getTypePair
+    );
+  }
+
+  method get_transform ( :$raw = False ) is also<get-transform> {
+    propReturnObject(
+      gsk_transform_node_get_transform($!gsk-tn),
+      $raw,
+      |GSK::Transform.getTypePair
+    );
+  }
+
+  method get_type is also<get-type> {
+    state ($n, $t);
+
+    unstable_get_type( self.^name, &gsk_transform_node_get_type, $n, $t );
+  }
+
 }

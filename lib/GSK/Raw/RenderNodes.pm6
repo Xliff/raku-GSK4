@@ -165,7 +165,7 @@ sub gsk_color_matrix_node_new (
   is      export
 { * }
 
-sub gsk_color_node_get_color (GskRenderNode $node)
+sub gsk_color_node_get_color (GskColorNode $node)
   returns GdkRGBA
   is      native(gsk)
   is      export
@@ -181,7 +181,7 @@ sub gsk_color_node_new (
   GdkRGBA         $rgba,
   graphene_rect_t $bounds
 )
-  returns GskRenderNode
+  returns GskColorNode
   is      native(gsk)
   is      export
 { * }
@@ -905,13 +905,13 @@ sub gsk_texture_node_new (
   is      export
 { * }
 
-sub gsk_transform_node_get_child (GskRenderNode $node)
+sub gsk_transform_node_get_child (GskTransformNode $node)
   returns GskRenderNode
   is      native(gsk)
   is      export
 { * }
 
-sub gsk_transform_node_get_transform (GskRenderNode $node)
+sub gsk_transform_node_get_transform (GskTransformNode $node)
   returns GskTransform
   is      native(gsk)
   is      export
