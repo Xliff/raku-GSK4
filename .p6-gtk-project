@@ -1,0 +1,11 @@
+prefix=GSK
+struct-prefix=Gsk
+modules=GSK::Raw::Types
+backups=backup,bitbucket,google-backup,azure-backup,hut
+hfile-prefix=
+lib=gsk
+include-directory=/usr/src/gtk4-4.8.1+ds/gsk
+exec=p6gtkexec
+subprefixes=
+idir-avail=True
+build-exclude=GSK::Raw::Traps
