@@ -1,6 +1,7 @@
 use v6.c;
 
 use Method::Also;
+use NativeCall;
 
 use GLib::Raw::Traits;
 use GSK::Raw::Types:ver<4>;
@@ -31,7 +32,7 @@ class GSK::RenderNode:ver<4> {
   method new (GskRenderNode $gsk-render-node, :$ref = True) {
     return Nil unless $gsk-render-node;
 
-    $o = self.bless( :$gsk-render-node );
+    my $o = self.bless( :$gsk-render-node );
     $o.ref if $ref;
     $o;
   }
@@ -53,15 +54,15 @@ class GSK::RenderNode:ver<4> {
   }
 
   method draw (cairo_t() $cr) {
-    gsk_render_node_draw($node, $cr);
+    gsk_render_node_draw($!gsk-rn, $cr);
   }
 
   method get_bounds (graphene_rect_t() $bounds) is also<get-bounds> {
-    gsk_render_node_get_bounds($node, $bounds);
+    gsk_render_node_get_bounds($!gsk-rn, $bounds);
   }
 
   method get_node_type is also<get-node-type> {
-    gsk_render_node_get_node_type($node);
+    gsk_render_node_get_node_type($!gsk-rn);
   }
 
   method get_type is also<get-type> {
@@ -71,16 +72,16 @@ class GSK::RenderNode:ver<4> {
   }
 
   method ref {
-    gsk_render_node_ref($node);
+    gsk_render_node_ref($!gsk-rn);
     self;
   }
 
   method serialize {
-    gsk_render_node_serialize($node);
+    gsk_render_node_serialize($!gsk-rn);
   }
 
   method unref {
-    gsk_render_node_unref($node);
+    gsk_render_node_unref($!gsk-rn);
   }
 
   method write_to_file (
@@ -90,14 +91,13 @@ class GSK::RenderNode:ver<4> {
     is also<write-to-file>
   {
     clear_error;
-    my $rv = so gsk_render_node_write_to_file($node, $filename, $error);
+    my $rv = so gsk_render_node_write_to_file($!gsk-rn, $filename, $error);
     set_error($error);
     $rv;
   }
 
   method serialization_error_quark
     is static
-
     is also<serialization-error-quark>
   {
     gsk_serialization_error_quark();

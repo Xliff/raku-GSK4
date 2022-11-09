@@ -2,11 +2,20 @@ use v6.c;
 
 use NativeCall;
 
+use Cairo;
 use GLib::Raw::Definitions;
 use GLib::Raw::Structs;
+use Graphene::Raw::Definitions;
+use Pango::Raw::Definitions;
+use Pango::Raw::Enums;
+use Pango::Raw::Structs;
+use GDK::Raw::Structs;
+use GDK::Raw::Definitions:ver<4>;
 use GSK::Raw::Definitions:ver<4>;
+use GSK::Raw::Enums:ver<4>;
+use GSK::Raw::Structs:ver<4>;
 
-unit package GSK::Raw::RenderNodes;zS
+unit package GSK::Raw::RenderNodes;
 
 ### /usr/src/gtk4-4.8.1+ds/gsk/gskrendernode.h
 
@@ -614,7 +623,12 @@ sub gsk_radial_gradient_node_new (
 
 sub gsk_render_node_deserialize (
   GBytes            $bytes,
-  GskParseErrorFunc $error_func,
+                    &error_func (
+                      GskParseLocation,
+                      GskParseLocation,
+                      GError,
+                      gpointer
+                    ),
   gpointer          $user_data
 )
   returns GskRenderNode
