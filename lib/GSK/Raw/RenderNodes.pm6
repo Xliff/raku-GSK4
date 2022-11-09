@@ -199,7 +199,7 @@ sub gsk_conic_gradient_node_get_center (GskConicGradientNode $node)
 { * }
 
 sub gsk_conic_gradient_node_get_color_stops (
-  GskRenderNode $node,
+  GskConicGradientNode $node,
   gsize         $n_stops
 )
   returns GskColorStop
@@ -238,7 +238,7 @@ sub gsk_conic_gradient_node_new (
 { * }
 
 sub gsk_container_node_get_child (
-  GskRenderNode $node,
+  GskContainerNode $node,
   guint         $idx
 )
   returns GskRenderNode
@@ -335,7 +335,7 @@ sub gsk_gl_shader_node_get_args (GskGLShaderNode $node)
 { * }
 
 sub gsk_gl_shader_node_get_child (
-  GskRenderNode $node,
+  GskGLShaderNode $node,
   guint         $idx
 )
   returns GskRenderNode
@@ -555,14 +555,14 @@ sub gsk_outset_shadow_node_new (
   is      export
 { * }
 
-sub gsk_radial_gradient_node_get_center (GskRenderNode $node)
+sub gsk_radial_gradient_node_get_center (GskRadialGradientNode $node)
   returns graphene_point_t
   is      native(gsk)
   is      export
 { * }
 
 sub gsk_radial_gradient_node_get_color_stops (
-  GskRenderNode $node,
+  GskRadialGradientNode $node,
   gsize         $n_stops
 )
   returns GskColorStop
@@ -570,25 +570,25 @@ sub gsk_radial_gradient_node_get_color_stops (
   is      export
 { * }
 
-sub gsk_radial_gradient_node_get_end (GskRenderNode $node)
+sub gsk_radial_gradient_node_get_end (GskRadialGradientNode $node)
   returns gfloat
   is      native(gsk)
   is      export
 { * }
 
-sub gsk_radial_gradient_node_get_hradius (GskRenderNode $node)
+sub gsk_radial_gradient_node_get_hradius (GskRadialGradientNode $node)
   returns gfloat
   is      native(gsk)
   is      export
 { * }
 
-sub gsk_radial_gradient_node_get_n_color_stops (GskRenderNode $node)
+sub gsk_radial_gradient_node_get_n_color_stops (GskRadialGradientNode $node)
   returns gsize
   is      native(gsk)
   is      export
 { * }
 
-sub gsk_radial_gradient_node_get_start (GskRenderNode $node)
+sub gsk_radial_gradient_node_get_start (GskRadialGradientNode $node)
   returns gfloat
   is      native(gsk)
   is      export
@@ -600,7 +600,7 @@ sub gsk_radial_gradient_node_get_type
   is      export
 { * }
 
-sub gsk_radial_gradient_node_get_vradius (GskRenderNode $node)
+sub gsk_radial_gradient_node_get_vradius (GskRadialGradientNode $node)
   returns gfloat
   is      native(gsk)
   is      export
@@ -616,7 +616,7 @@ sub gsk_radial_gradient_node_new (
   GskColorStop     $color_stops,
   gsize            $n_color_stops
 )
-  returns GskRenderNode
+  returns GskRadialGradientNode
   is      native(gsk)
   is      export
 { * }
@@ -691,13 +691,13 @@ sub gsk_render_node_write_to_file (
   is      export
 { * }
 
-sub gsk_repeat_node_get_child (GskRenderNode $node)
+sub gsk_repeat_node_get_child (GskRepeatNode $node)
   returns GskRenderNode
   is      native(gsk)
   is      export
 { * }
 
-sub gsk_repeat_node_get_child_bounds (GskRenderNode $node)
+sub gsk_repeat_node_get_child_bounds (GskRepeatNode $node)
   returns graphene_rect_t
   is      native(gsk)
   is      export
@@ -714,7 +714,7 @@ sub gsk_repeat_node_new (
   GskRenderNode   $child,
   graphene_rect_t $child_bounds
 )
-  returns GskRenderNode
+  returns GskRepeatNode
   is      native(gsk)
   is      export
 { * }
@@ -732,7 +732,7 @@ sub gsk_repeating_linear_gradient_node_new (
   GskColorStop     $color_stops,
   gsize            $n_color_stops
 )
-  returns GskRenderNode
+  returns GskRepeatingLinearGradientNode
   is      native(gsk)
   is      export
 { * }
@@ -753,18 +753,18 @@ sub gsk_repeating_radial_gradient_node_new (
   GskColorStop     $color_stops,
   gsize            $n_color_stops
 )
+  returns GskRepeatingRadialGradientNode
+  is      native(gsk)
+  is      export
+{ * }
+
+sub gsk_rounded_clip_node_get_child (GskRoundedClipNode $node)
   returns GskRenderNode
   is      native(gsk)
   is      export
 { * }
 
-sub gsk_rounded_clip_node_get_child (GskRenderNode $node)
-  returns GskRenderNode
-  is      native(gsk)
-  is      export
-{ * }
-
-sub gsk_rounded_clip_node_get_clip (GskRenderNode $node)
+sub gsk_rounded_clip_node_get_clip (GskRoundedClipNode $node)
   returns GskRoundedRect
   is      native(gsk)
   is      export
@@ -780,7 +780,7 @@ sub gsk_rounded_clip_node_new (
   GskRenderNode  $child,
   GskRoundedRect $clip
 )
-  returns GskRenderNode
+  returns GskRoundedClipNode
   is      native(gsk)
   is      export
 { * }
@@ -791,20 +791,20 @@ sub gsk_serialization_error_quark
   is      export
 { * }
 
-sub gsk_shadow_node_get_child (GskRenderNode $node)
+sub gsk_shadow_node_get_child (GskShadowNode $node)
   returns GskRenderNode
   is      native(gsk)
   is      export
 { * }
 
-sub gsk_shadow_node_get_n_shadows (GskRenderNode $node)
+sub gsk_shadow_node_get_n_shadows (GskShadowNode $node)
   returns gsize
   is      native(gsk)
   is      export
 { * }
 
 sub gsk_shadow_node_get_shadow (
-  GskRenderNode $node,
+  GskShadowNode $node,
   gsize         $i
 )
   returns GskShadow
@@ -823,7 +823,7 @@ sub gsk_shadow_node_new (
   GskShadow     $shadows,
   gsize         $n_shadows
 )
-  returns GskRenderNode
+  returns GskShadowNode
   is      native(gsk)
   is      export
 { * }
@@ -884,7 +884,7 @@ sub gsk_text_node_new (
   is      export
 { * }
 
-sub gsk_texture_node_get_texture (GskRenderNode $node)
+sub gsk_texture_node_get_texture (GskTextureNode $node)
   returns GdkTexture
   is      native(gsk)
   is      export
@@ -900,7 +900,7 @@ sub gsk_texture_node_new (
   GdkTexture      $texture,
   graphene_rect_t $bounds
 )
-  returns GskRenderNode
+  returns GskTextureNode
   is      native(gsk)
   is      export
 { * }
@@ -927,7 +927,7 @@ sub gsk_transform_node_new (
   GskRenderNode $child,
   GskTransform  $transform
 )
-  returns GskRenderNode
+  returns GskTransformNode
   is      native(gsk)
   is      export
 { * }
