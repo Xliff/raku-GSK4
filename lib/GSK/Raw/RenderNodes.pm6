@@ -47,7 +47,7 @@ sub gsk_blur_node_new (
 { * }
 
 sub gsk_border_node_get_colors (GskBorderNode $node)
-  returns GdkRGBA
+  returns gpointer # Array of GdkRGBA
   is      native(gsk)
   is      export
 { * }
@@ -65,7 +65,7 @@ sub gsk_border_node_get_type
 { * }
 
 sub gsk_border_node_get_widths (GskBorderNode $node)
-  returns gfloat
+  returns CArray[gfloat]
   is      native(gsk)
   is      export
 { * }
