@@ -4,8 +4,8 @@ use GSK::Raw::Types:ver<4>;
 use GSK::Raw::RenderNodes:ver<4>;
 
 use GSK::RenderNode:ver<4>;
-
 use GLib::Roles::Implementor;
+use GLib::Roles::TypedBuffer;
 
 class GSK::Node::Gradient::Repeating::Radial is GSK::RenderNode {
   also does GLib::Roles::Implementor;
