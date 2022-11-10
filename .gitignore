@@ -3,7 +3,7 @@ doc/linecountdata*/
 *.pm6bak
 LastBuildResults
 LastBuildResults.*
-*.bak
+*bak
 *.iml
 *.bump
 *~
