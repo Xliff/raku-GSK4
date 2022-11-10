@@ -11,6 +11,7 @@ use Graphene::Point;
 use GSK::RenderNode:ver<4>;
 
 use GLib::Roles::Implementor;
+use GLib::Roles::TypedBuffer;
 
 our subset GskTextNodeAncestry is export of Mu
   where GskTextNode | GskRenderNode;
@@ -89,7 +90,6 @@ class GSK::Node::Text:ver<4> is GSK::RenderNode:ver<4> {
     );
   }
 
-
   proto method get_glyphs (|)
   { * }
 
@@ -101,12 +101,12 @@ class GSK::Node::Text:ver<4> is GSK::RenderNode:ver<4> {
   {
     my guint $n = 0;
 
-    my $ga = gsk_text_node_get_glyphs($!gsk-tn, $n);
-    $n_glyphs = $n;
-    $ga = GLib::Roles::TypedBuffer[PangoGlyphInfo].new($ga);
-    return $ga if $buffer;
-    $raw ?? $ga.Array
-         !! $ga.Array.map({ Pango::GlyphInfo.new( $_ ) });
+    returnBufferTypedArray(
+       gsk_text_node_get_glyphs($!gsk-tn, $n),
+      |Pango::GlyphInfo.getTypePair,
+      :$buffer,
+      :$raw
+    );
   }
 
   method get_num_glyphs
