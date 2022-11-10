@@ -91,3 +91,11 @@ class GSK::Node::RoundedClip:ver<4> is GSK::RenderNode:ver<4> {
   }
 
 }
+
+INIT {
+  my \O = GSK::Node::RoundedClip;
+  %render-node-types<RoundedClip> = {
+    object => O,
+    type   => O.get_type
+  }
+}

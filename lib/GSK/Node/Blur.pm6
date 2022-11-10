@@ -86,3 +86,11 @@ class GSK::Node::Blur:ver<4> is GSK::RenderNode:ver<4> {
   }
 
 }
+
+INIT {
+  my \O = GSK::Node::Blur;
+  %render-node-types<Blur> = {
+    object => O,
+    type   => O.get_type
+  }
+}

@@ -143,3 +143,11 @@ class GSK::Node::Text:ver<4> is GSK::RenderNode:ver<4> {
   }
 
 }
+
+INIT {
+  my \O = GSK::Node::Text;
+  %render-node-types<Text> = {
+    object => O,
+    type   => O.get_type
+  }
+}

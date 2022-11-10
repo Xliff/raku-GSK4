@@ -75,3 +75,11 @@ class GSK::Node::Texture:ver<4> is GSK::RenderNode:ver<4> {
   }
 
 }
+
+INIT {
+  my \O = GSK::Node::Texture;
+  %render-node-types<Texture> = {
+    object => O,
+    type   => O.get_type
+  }
+}

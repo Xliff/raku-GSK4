@@ -91,3 +91,11 @@ class GSK::Node::Cairo:ver<4> is GSK::RenderNode:ver<4> {
   }
 
 }
+
+INIT {
+  my \O = GSK::Node::Cairo;
+  %render-node-types<Cairo> = {
+    object => O,
+    type   => O.get_type
+  }
+}

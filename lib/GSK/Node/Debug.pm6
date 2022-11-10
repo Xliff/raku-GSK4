@@ -84,3 +84,11 @@ class GSK::Node::Debug:ver<4> is GSK::RenderNode:ver<4> {
   }
 
 }
+
+INIT {
+  my \O = GSK::Node::Debug;
+  %render-node-types<Debug> = {
+    object => O,
+    type   => O.get_type
+  }
+}

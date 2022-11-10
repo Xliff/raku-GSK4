@@ -78,3 +78,11 @@ class GSK::Node::Transform:ver<4> is GSK::RenderNode:ver<4> {
   }
 
 }
+
+INIT {
+  my \O = GSK::Node::Transform;
+  %render-node-types<Transform> = {
+    object => O,
+    type   => O.get_type
+  }
+}

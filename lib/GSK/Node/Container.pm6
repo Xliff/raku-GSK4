@@ -110,3 +110,11 @@ class GSK::Node::Container:ver<4> is GSK::RenderNode:ver<4> {
   }
 
 }
+
+INIT {
+  my \O = GSK::Node::Container;
+  %render-node-types<Container> = {
+    object => O,
+    type   => O.get_type
+  }
+}

@@ -115,3 +115,11 @@ class GSK::Node::Shadow:ver<4> is GSK::RenderNode:ver<4> {
   }
 
 }
+
+INIT {
+  my \O = GSK::Node::Shadow;
+  %render-node-types<Shadow> = {
+    object => O,
+    type   => O.get_type
+  }
+}
