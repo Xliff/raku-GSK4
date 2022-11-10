@@ -76,6 +76,15 @@ class GSK::Node::Shadow::Outset:ver<4> is GSK::RenderNode:ver<4> {
     $gsk-outset-shadow-node ?? self.bless( :$gsk-outset-shadow-node ) !! Nil;
   }
 
+  method get_blur_radius
+    is also<
+      get-blur-radius
+      blur_radius
+      blur-radius
+    >
+  {
+    gsk_outset_shadow_node_get_blur_radius($!gsk-osn);
+  }
 
   method get_color ( :$raw = False )
     is also<
