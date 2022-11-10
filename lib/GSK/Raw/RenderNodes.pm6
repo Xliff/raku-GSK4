@@ -473,7 +473,7 @@ sub gsk_linear_gradient_node_new (
   is      export
 { * }
 
-sub gsk_opacity_node_get_child (GskLinearGradientNode $node)
+sub gsk_opacity_node_get_child (GskOpacityNode $node)
   returns GskRenderNode
   is      native(gsk)
   is      export
