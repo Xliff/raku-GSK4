@@ -2,6 +2,7 @@ use v6.c;
 
 use Method::Also;
 
+use GLib::Raw::Traits;
 use GSK::Raw::Types:ver<4>;
 use GSK::Raw::RoundedRect:ver<4>;
 
@@ -64,14 +65,14 @@ class GSK::RoundedRect:ver<4> {
 
   method copy ( :$raw = False ) {
     propReturnObject(
-      ::?CLASS.init_copy(GskGroundedRect.new, $!gsk-rr),
+      ::?CLASS.init_copy(GskRoundedRect.new, $!gsk-rr),
       $raw,
       |self.getTypePair
     );
   }
 
   method init (
-    GskRoundedRect()  $self
+    GskRoundedRect()  $self,
     graphene_rect_t() $bounds,
     graphene_size_t() $top_left,
     graphene_size_t() $top_right,
@@ -122,7 +123,7 @@ class GSK::RoundedRect:ver<4> {
   }
 
   method intersects_rect (graphene_rect_t() $rect) is also<intersects-rect> {
-    so ogsk_rounded_rect_intersects_rect($!gsk-rr, $rect);
+    so gsk_rounded_rect_intersects_rect($!gsk-rr, $rect);
   }
 
   method is_rectilinear is also<is-rectilinear> {
@@ -133,14 +134,14 @@ class GSK::RoundedRect:ver<4> {
     gsk_rounded_rect_normalize($!gsk-rr);
   }
 
-  method offset (
+  multi method offset (
     Num() :$dx  = 0,
     Num() :$dy  = 0,
           :$raw = False
   ) {
-    samewith($dx, $dy, :$false);
+    samewith($dx, $dy, :$raw);
   }
-  method offset (
+  multi method offset (
     Num()  $dx,
     Num()  $dy,
           :$raw = False
