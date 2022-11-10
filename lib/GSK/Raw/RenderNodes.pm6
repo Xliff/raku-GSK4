@@ -19,6 +19,40 @@ unit package GSK::Raw::RenderNodes;
 
 ### /usr/src/gtk4-4.8.1+ds/gsk/gskrendernode.h
 
+sub gsk_blend_node_get_blend_mode (GskBlendNode $node)
+  returns GskBlendMode
+  is      native(gsk)
+  is      export
+{ * }
+
+sub gsk_blend_node_get_bottom_child (GskBlendNode $node)
+  returns GskRenderNode
+  is      native(gsk)
+  is      export
+{ * }
+
+sub gsk_blend_node_get_top_child (GskBlendNode $node)
+  returns GskRenderNode
+  is      native(gsk)
+  is      export
+{ * }
+
+sub gsk_blend_node_get_type
+  returns GType
+  is      native(gsk)
+  is      export
+{ * }
+
+sub gsk_blend_node_new (
+  GskRenderNode $bottom,
+  GskRenderNode $top,
+  GskBlendMode  $blend_mode
+)
+  returns GskBlendNode
+  is      native(gsk)
+  is      export
+{ * }
+
 sub gsk_blur_node_get_child (GskBlurNode $node)
   returns GskRenderNode
   is      native(gsk)
