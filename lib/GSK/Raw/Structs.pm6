@@ -30,6 +30,9 @@ class GskParseLocation is repr<CStruct> does GLib::Roles::Pointers is export {
   has gsize $.lines;
   has gsize $.line_byte;
   has gsize $.line_char;
+
+  method line-byte { $!line_byte }
+  method line-char { $!line_char }
 }
 
 class GskShadow       is repr<CStruct> does GLib::Roles::Pointers is export {
