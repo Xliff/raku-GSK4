@@ -143,3 +143,12 @@ class GSK::Node::Gradient::Repeating::Radial:ver<4>
   }
 
 }
+
+INIT {
+  my \O = GSK::Node::Gradient::Repeating::Radial;
+  %render-node-types<Gradient::Repeating::Radial> = {
+    object    => O,
+    node-type => GSK_REPEATING_RADIAL_GRADIENT_NODE,
+    type      => O.get_type
+  }
+}
