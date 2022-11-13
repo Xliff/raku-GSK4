@@ -19,6 +19,7 @@ class GskBlendNode                   is repr<CPointer> does GLib::Roles::Pointer
 class GskBlurNode                    is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskBorderNode                  is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskCairoNode                   is repr<CPointer> does GLib::Roles::Pointers is export { }
+class GskCairoRenderer               is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskClipNode                    is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskColorMatrixNode             is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskColorNode                   is repr<CPointer> does GLib::Roles::Pointers is export { }
