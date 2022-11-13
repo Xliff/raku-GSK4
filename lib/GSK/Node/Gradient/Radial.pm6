@@ -14,7 +14,7 @@ use GLib::Roles::TypedBuffer;
 our subset GskRadialGradientNodeAncestry is export of Mu
   where GskRadialGradientNode | GskRenderNode;
 
-class GSK::Node::RadialGradient:ver<4> is GSK::RenderNode:ver<4> {
+class GSK::Node::Gradient::Radial:ver<4> is GSK::RenderNode:ver<4> {
   also does GLib::Roles::Implementor;
 
   has GskRadialGradientNode $!gsk-rgn is implementor;
