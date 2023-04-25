@@ -38,6 +38,7 @@ class GskRepeatingLinearGradientNode is repr<CPointer> does GLib::Roles::Pointer
 class GskRepeatingRadialGradientNode is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskRoundedClipNode             is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskShadowNode                  is repr<CPointer> does GLib::Roles::Pointers is export { }
+class GskShaderArgsBuilder           is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskTextNode                    is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskTextureNode                 is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskTransformNode               is repr<CPointer> does GLib::Roles::Pointers is export { }
