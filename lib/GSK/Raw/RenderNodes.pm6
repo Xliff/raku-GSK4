@@ -236,7 +236,7 @@ sub gsk_conic_gradient_node_get_color_stops (
   GskConicGradientNode $node,
   gsize         $n_stops
 )
-  returns GskColorStop
+  returns gpointer # Array of GskColorStop
   is      native(gsk)
   is      export
 { * }
@@ -466,7 +466,7 @@ sub gsk_linear_gradient_node_get_color_stops (
   GskLinearGradientNode $node,
   gsize         $n_stops
 )
-  returns GskColorStop
+  returns gpointer # Array of GskColorStop
   is      native(gsk)
   is      export
 { * }
@@ -599,7 +599,7 @@ sub gsk_radial_gradient_node_get_color_stops (
   GskRadialGradientNode $node,
   gsize         $n_stops
 )
-  returns GskColorStop
+  returns gpointer # Array of GskColorStop
   is      native(gsk)
   is      export
 { * }
