@@ -120,7 +120,10 @@ class GSK::Renderer:ver<4> {
     $rv;
   }
 
-  method render (GskRenderNode() $root, cairo_region_t() $region) {
+  method render (
+    GskRenderNode()  $root,
+    cairo_region_t() $region = cairo_region_t
+  ) {
     gsk_renderer_render($!gr, $root, $region);
   }
 
