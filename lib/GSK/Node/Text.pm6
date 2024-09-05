@@ -21,8 +21,8 @@ class GSK::Node::Text:ver<4> is GSK::RenderNode:ver<4> {
 
   has GskTextNode $!gsk-tn is implementor;
 
-  submethod BUILD ( :$gsk-transform-node ) {
-    self.setGskTextNode($gsk-transform-node) if $gsk-transform-node
+  submethod BUILD ( :$gsk-text-node ) {
+    self.setGskTextNode($gsk-text-node) if $gsk-text-node
   }
 
   method setGskTextNode (GskTextNodeAncestry $_) {
@@ -46,10 +46,10 @@ class GSK::Node::Text:ver<4> is GSK::RenderNode:ver<4> {
     is also<GskTextNode>
   { $!gsk-tn }
 
-  multi method new (GskTextNodeAncestry $gsk-transform-node, :$ref = True) {
-    return unless $gsk-transform-node;
+  multi method new (GskTextNodeAncestry $gsk-text-node, :$ref = True) {
+    return unless $gsk-text-node;
 
-    my $o = self.bless( :$gsk-transform-node );
+    my $o = self.bless( :$gsk-text-node );
     $o.ref if $ref;
     $o;
   }
@@ -101,7 +101,7 @@ class GSK::Node::Text:ver<4> is GSK::RenderNode:ver<4> {
   {
     my guint $n = 0;
 
-    returnBufferTypedArray(
+    bufferReturnTypedArray(
        gsk_text_node_get_glyphs($!gsk-tn, $n),
       |Pango::GlyphInfo.getTypePair,
       :$buffer,
@@ -147,7 +147,8 @@ class GSK::Node::Text:ver<4> is GSK::RenderNode:ver<4> {
 INIT {
   my \O = GSK::Node::Text;
   %render-node-types<Text> = {
-    object => O,
-    type   => O.get_type
+    object    => O,
+    node-type => GSK_TEXT_NODE,
+    pair      => O.getTypePair
   }
 }
