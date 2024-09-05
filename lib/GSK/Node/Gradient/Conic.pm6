@@ -169,6 +169,6 @@ INIT {
   %render-node-types<Gradient::Conic> = {
     object    => O,
     node-type => GSK_CONIC_GRADIENT_NODE,
-    type      => O.get_type
+    pair      => O.getTypePair
   }
 }

@@ -125,6 +125,6 @@ INIT {
   %render-node-types<ColorMatrix> = {
     object    => O,
     node-type => GSK_CROSS_FADE_NODE,
-    type      => O.get_type
+    pair      => O.getTypePair
   }
 }

@@ -175,3 +175,12 @@ class GSK::Node::Gradient::Radial:ver<4> is GSK::RenderNode:ver<4> {
   }
 
 }
+
+INIT {
+  my \O = GSK::Node::Gradient::Radial;
+  %render-node-types<Gradient::Radial> = {
+    object    => O,
+    node-type => GSK_RADIAL_GRADIENT_NODE,
+    pair      => O.getTypePair
+  }
+}

@@ -110,6 +110,6 @@ INIT {
   %render-node-types<Gradient::Repeating::Linear> = {
     object    => O,
     node-type => GSK_REPEATING_LINEAR_GRADIENT_NODE,
-    type      => O.get_type
+    pair      => O.getTypePair
   }
 }

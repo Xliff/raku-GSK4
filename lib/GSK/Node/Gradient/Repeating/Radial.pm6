@@ -149,6 +149,6 @@ INIT {
   %render-node-types<Gradient::Repeating::Radial> = {
     object    => O,
     node-type => GSK_REPEATING_RADIAL_GRADIENT_NODE,
-    type      => O.get_type
+    pair      => O.getTypePair
   }
 }

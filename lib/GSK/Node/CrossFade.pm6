@@ -122,6 +122,6 @@ INIT {
   %render-node-types<CrossFade> = {
     object    => O,
     node-type => GSK_CROSS_FADE_NODE,
-    type      => O.get_type
+    pair      => O.getTypePair
   }
 }

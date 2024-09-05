@@ -152,6 +152,6 @@ INIT {
   %render-node-types<Shadow::Outset> = {
     object    => O,
     node-type => GSK_OUTSET_SHADOW_NODE,
-    type      => O.get_type
+    pair      => O.getTypePair
   }
 }

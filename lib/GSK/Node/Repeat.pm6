@@ -97,7 +97,8 @@ class GSK::Node::Repeat:ver<4> is GSK::RenderNode:ver<4> {
 INIT {
   my \O = GSK::Node::Repeat;
   %render-node-types<Repeat> = {
-    object => O,
-    type   => O.get_type
+    object    => O,
+    node-type => GSK_REPEAT_NODE,
+    pair      => O.getTypePair
   }
 }

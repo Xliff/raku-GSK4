@@ -130,6 +130,6 @@ INIT {
   %render-node-types<Shadow::Inset> = {
     object    => O,
     node-type => GSK_INSET_SHADOW_NODE,
-    type      => O.get_type
+    pair      => O.getTypePair
   }
 }
