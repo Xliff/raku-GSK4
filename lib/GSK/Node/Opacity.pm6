@@ -57,16 +57,20 @@ class GSK::Node::Opacity:ver<4> is GSK::RenderNode:ver<4> {
     $gsk-opacity-node ?? self.bless( :$gsk-opacity-node ) !! Nil;
   }
 
-  method get_child ( :$raw = False )
+  method get_child (
+    :quick(:$fast)  = False,
+    :$raw           = False,
+    :slow(:$proper) = $fast.not
+  )
     is also<
       get-child
       child
     >
   {
-    propReturnObject(
+    returnProperNode(
       gsk_opacity_node_get_child($!gsk-on),
-      $raw,
-      |GSK::RenderNode.getTypePair
+      :$proper
+      :$raw,
     );
   }
 
@@ -85,4 +89,13 @@ class GSK::Node::Opacity:ver<4> is GSK::RenderNode:ver<4> {
     unstable_get_type( self.^name, &gsk_opacity_node_get_type, $n, $t );
   }
 
+}
+
+INIT {
+  my \O = GSK::Node::Opacity;
+  %render-node-types<Opacity> = {
+    object    => O,
+    node-type => GSK_OPACITY_NODE,
+    pair      => O.getTypePair
+  }
 }
