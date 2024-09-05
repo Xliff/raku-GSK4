@@ -9,3 +9,4 @@ exec=p6gtk4exec
 subprefixes=
 idir-avail=True
 build-exclude=GSK::Raw::Traps
+manifest-blacklist=GSK::RenderNodes,GSK::Value
