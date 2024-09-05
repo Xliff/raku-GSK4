@@ -70,16 +70,20 @@ class GSK::Node::Shadow:ver<4> is GSK::RenderNode:ver<4> {
     $gsk-shadow-node ?? self.bless( :$gsk-shadow-node ) !! Nil;
   }
 
-  method get_child ( :$raw = False )
+  method get_child (
+    :quick(:$fast)  = False,
+    :$raw           = False,
+    :slow(:$proper) = $fast.not
+  )
     is also<
       get-child
       child
     >
   {
-    propReturnObject(
+    returnProperNode(
       gsk_shadow_node_get_child($!gsk-sn),
-      $raw,
-      |GSK::RenderNode.getTypePair
+      :$raw,
+      :$proper
     );
   }
 
@@ -119,7 +123,8 @@ class GSK::Node::Shadow:ver<4> is GSK::RenderNode:ver<4> {
 INIT {
   my \O = GSK::Node::Shadow;
   %render-node-types<Shadow> = {
-    object => O,
-    type   => O.get_type
+    object    => O,
+    node-type => GSK_SHADOW_NODE,
+    pair      => O.getTypePair
   }
 }
