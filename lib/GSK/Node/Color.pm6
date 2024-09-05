@@ -53,13 +53,7 @@ class GSK::Node::Color:ver<4> is GSK::RenderNode:ver<4> {
     $o;
   }
   multi method new (GdkRGBA() $rgba, graphene_rect_t() $bounds) {
-    $rgba.gist.say;
-    $bounds.gist.say;
-    my $gsk-color-node = gsk_color_node_new(
-      $rgba,
-      $bounds
-    );
-    $gsk-color-node.gist.say;
+    my $gsk-color-node = gsk_color_node_new($rgba, $bounds);
 
     $gsk-color-node ?? self.bless( :$gsk-color-node ) !! Nil
   }
@@ -88,7 +82,8 @@ class GSK::Node::Color:ver<4> is GSK::RenderNode:ver<4> {
 INIT {
   my \O = GSK::Node::Color;
   %render-node-types<Color> = {
-    object => O,
-    type   => O.get_type
+    object    => O,
+    node-type => GSK_COLOR_NODE,
+    pair      => O.getTypePair
   }
 }
