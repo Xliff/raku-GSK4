@@ -8,6 +8,8 @@ use Graphene::Rect;
 use GLib::Roles::Implementor;
 
 class GSK::Path {
+  also does GLib::Roles::Implementor;
+  
   has GskPath $!gsk-p is implementor;
 
   submethod BUILD ( :$gsk-path ) {
@@ -24,9 +26,10 @@ class GSK::Path {
     self.parse($p);
   }
 
-  method parse (Str() $p) {
+  method parse (Str() $p, :$raw = False) {
     my $gsk-path = gsk_path_parse($p);
 
+    return $gsk-path if $raw;
     $gsk-path ?? self.bless( :$gsk-path ) !! Nil;
   }
 
