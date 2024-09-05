@@ -11,6 +11,7 @@ use GSK::Raw::Exports:ver<4>;
 unit package GDK::Raw::Types:ver<4>;
 
 need Cairo;
+need GLib::Raw::Debug;
 need GLib::Raw::Definitions;
 need GLib::Raw::Enums;
 need GLib::Raw::Exceptions;
