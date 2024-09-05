@@ -52,7 +52,7 @@ class GSK::Node::Blend:ver<4> is GSK::RenderNode:ver<4> {
   multi method new (
     GskRenderNode() $bottom,
     GskRenderNode() $top,
-    GskBlendMode  $blend_mode
+    Int()           $blend_mode
   ) {
     my GskBlendMode $b = $blend_mode;
 
@@ -74,31 +74,39 @@ class GSK::Node::Blend:ver<4> is GSK::RenderNode:ver<4> {
     GskBlendModeEnum($m);
   }
 
-  method get_bottom_child ( :$raw = False )
+  method get_bottom_child (
+    :quick(:$fast)  = False,
+    :$raw           = False,
+    :slow(:$proper) = $fast.not
+  )
     is also<
       get-bottom-child
       bottom_child
       bottom-child
     >
   {
-    propReturnObject(
+    returnProperNode(
       gsk_blend_node_get_bottom_child($!gsk-bn),
-      $raw,
-      |GSK::RenderNode.getTypePair
+      :$raw,
+      :$proper
     );
   }
 
-  method get_top_child ( :$raw = False )
+  method get_top_child (
+    :quick(:$fast)  = False,
+    :$raw           = False,
+    :slow(:$proper) = $fast.not
+  )
     is also<
       get-top-child
       top_child
       top-child
     >
   {
-    propReturnObject(
+    returnProperNode(
       gsk_blend_node_get_top_child($!gsk-bn),
-      $raw,
-      |GSK::RenderNode.getTypePair
+      :$raw,
+      :$proper
     );
   }
 
@@ -108,4 +116,13 @@ class GSK::Node::Blend:ver<4> is GSK::RenderNode:ver<4> {
     unstable_get_type( self.^name, &gsk_blend_node_get_type, $n, $t );
   }
 
+}
+
+INIT {
+  my \O = GSK::Node::Blend;
+  %render-node-types<Blend> = {
+    object    => O,
+    node-type => GSK_BLEND_NODE,
+    pair      => O.getTypePair
+  }
 }
