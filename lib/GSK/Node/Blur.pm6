@@ -57,16 +57,20 @@ class GSK::Node::Blur:ver<4> is GSK::RenderNode:ver<4> {
     $gsk-blur-node ?? self.bless( :$gsk-blur-node ) !! Nil;
   }
 
-  method get_child ( :$raw = False )
+  method get_child (
+    :quick(:$fast)  = False,
+    :$raw           = False,
+    :slow(:$proper) = $fast.not
+  )
     is also<
       get-child
       child
     >
   {
-    propReturnObject(
+    returnProperNode(
       gsk_blur_node_get_child($!gsk-bn),
-      $raw,
-      |GSK::RenderNode.getTypePair
+      :$raw,
+      :$proper
     );
   }
 
@@ -90,7 +94,8 @@ class GSK::Node::Blur:ver<4> is GSK::RenderNode:ver<4> {
 INIT {
   my \O = GSK::Node::Blur;
   %render-node-types<Blur> = {
-    object => O,
-    type   => O.get_type
+    object    => O,
+    node-type => GSK_BLUR_NODE,
+    pair      => O.getTypePair
   }
 }
