@@ -3,7 +3,10 @@ use v6.c;
 use NativeCall;
 
 use GLib::Raw::Definitions;
+use GLib::Raw::Structs;
+use Graphene::Raw::Definitions;
 use GSK::Raw::Definitions;
+use GSK::Raw::Enums;
 use GSK::Raw::Structs;
 
 unit package GSK::Raw::Transform:ver<4>;

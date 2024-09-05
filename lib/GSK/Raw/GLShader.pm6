@@ -4,7 +4,9 @@ use NativeCall;
 
 use GLib::Raw::Definitions;
 use GLib::Raw::Structs;
+use Graphene::Raw::Definitions;
 use GSK::Raw::Definitions:ver<4>;
+use GSK::Raw::Enums:ver<4>;
 
 unit package GSK::Raw::GLShader;
 
