@@ -8,6 +8,8 @@ use GSK::Raw::Transform:ver<4>;
 use GLib::Roles::Implementor;
 
 class GSK::Transform:ver<4> {
+  also does GLib::Roles::Implementor;
+  
   has GskTransform $!gsk-t is implementor;
 
   submethod BUILD ( :$gsk-transform ) {
@@ -33,7 +35,7 @@ class GSK::Transform:ver<4> {
   method get_category ( :$enum = True ) {
     my $c = gsk_transform_get_category($!gsk-t);
     return $c unless $enum;
-    GskTransformCatetoryEnum($c);
+    GskTransformCategoryEnum($c);
   }
 
   method get_type {
@@ -58,17 +60,14 @@ class GSK::Transform:ver<4> {
     );
   }
 
-  multi method parse ( :$raw = False ) {
-    samewith(
-      newCArray( Pointer[GskTransform] ),
-      :$raw
-    );
-  }
   multi method parse (
+    Str()                          $string,
     CArray[Pointer[GskTransform]]  $out_transform,
                                   :$raw            = False
   ) {
-    gsk_transform_parse($!gsk-t, $out_transform);
+    my $rv = gsk_transform_parse($string, $out_transform);
+
+    return Nil unless $rv;
 
     propReturnObject(
       ppr( $out_transform[0] ),
@@ -106,7 +105,7 @@ class GSK::Transform:ver<4> {
     );
   }
 
-  method rotate_3d (Num() $angle, graphene_vec3_t() $axis) {
+  method rotate_3d (Num() $angle, graphene_vec3_t() $axis, :$raw = False) {
     my gfloat $a = $angle;
 
     propReturnObject(
@@ -127,9 +126,10 @@ class GSK::Transform:ver<4> {
   }
 
   method scale_3d (
-    Num()       $factor_x,
-    Num()       $factor_y  = $factor_x,
-    Num()       $factor_z  = $factor_x
+    Num()  $factor_x,
+    Num()  $factor_y  = $factor_x,
+    Num()  $factor_z  = $factor_x,
+          :$raw       = False
   ) {
     my gfloat ($fx, $fy, $fz) = ($factor_x, $factor_y, $factor_z);
 
@@ -142,7 +142,7 @@ class GSK::Transform:ver<4> {
 
   method skew (
     Num()  $skew_x,
-    Num()  $skew_y  = $skew_x
+    Num()  $skew_y  = $skew_x,
           :$raw     = False
   ) {
     my gfloat ($sx, $sy) = ($skew_x, $skew_y);
@@ -179,7 +179,7 @@ class GSK::Transform:ver<4> {
   proto method to_2d_components (|)
   { * }
 
-  multi method to_2d_components (
+  multi method to_2d_components {
     samewith($, $, $, $, $, $, $);
   }
   multi method to_2d_components (
@@ -223,10 +223,10 @@ class GSK::Transform:ver<4> {
   proto method to_matrix (|)
   { * }
 
-  method to_matrix {
+  multi method to_matrix {
     samewith(Graphene::Matrix.alloc);
   }
-  method to_matrix (graphene_matrix_t() $out_matrix) {
+  multi method to_matrix (graphene_matrix_t() $out_matrix) {
     gsk_transform_to_matrix($!gsk-t, $out_matrix);
   }
 
@@ -276,10 +276,10 @@ class GSK::Transform:ver<4> {
   proto method transform_point (|)
   { * }
 
-  method transform_point (graphene_point_t() $point, :$raw = False) {
+  multi method transform_point (graphene_point_t() $point, :$raw = False) {
     samewith($point, Graphene::Point.alloc, :$raw);
   }
-  method transform_point (
+  multi method transform_point (
     graphene_point_t()  $point,
     graphene_point_t()  $out_point,
                        :$raw        = False
