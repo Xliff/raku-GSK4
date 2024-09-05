@@ -34,6 +34,12 @@ our enum GskCornerEnum is export <
   GSK_CORNER_BOTTOM_LEFT
 >;
 
+our constant GskFillRule is export := guint32;
+our enum GskFillRuleEnum is export <
+  GSK_FILL_RULE_WINDING
+  GSK_FILL_RULE_EVEN_ODD
+>;
+
 constant GskGLUniformType is export := guint32;
 our enum GskGLUniformTypeEnum is export <
   GSK_GL_UNIFORM_TYPE_NONE
@@ -44,6 +50,24 @@ our enum GskGLUniformTypeEnum is export <
   GSK_GL_UNIFORM_TYPE_VEC2
   GSK_GL_UNIFORM_TYPE_VEC3
   GSK_GL_UNIFORM_TYPE_VEC4
+>;
+
+our constant GskPathForeachFlags is export := guint32;
+our enum GskPathForeachFlagsEnum is export (
+  GSK_PATH_FOREACH_ALLOW_ONLY_LINES => 0,
+  GSK_PATH_FOREACH_ALLOW_QUAD       => 1,
+  GSK_PATH_FOREACH_ALLOW_CUBIC      => 1 +< 1,
+  GSK_PATH_FOREACH_ALLOW_CONIC      => 1 +< 2
+);
+
+our constant GskPathOperation is export := guint32;
+our enum GskPathOperationEnum is export <
+  GSK_PATH_MOVE
+  GSK_PATH_CLOSE
+  GSK_PATH_LINE
+  GSK_PATH_QUAD
+  GSK_PATH_CUBIC
+  GSK_PATH_CONIC
 >;
 
 constant GskRenderNodeType is export := guint32;
