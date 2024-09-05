@@ -69,7 +69,12 @@ class GSK::Node::Container:ver<4> is GSK::RenderNode:ver<4> {
     gsk_container_node_new($children, $n);
   }
 
-  method get_child (Int() $idx, :$raw = False)
+  method get_child (
+    Int()  $idx,
+          :quick(:$fast)  = False,
+          :$raw           = False,
+          :slow(:$proper) = $fast.not
+  )
     is also<
       get-child
       child
@@ -77,10 +82,10 @@ class GSK::Node::Container:ver<4> is GSK::RenderNode:ver<4> {
   {
     my guint $i = $idx;
 
-    propReturnObject(
+    returnProperNode(
       gsk_container_node_get_child($!gsk-cn, $i),
-      $raw,
-      |GSK::RenderNode.getTypePair
+      :$raw,
+      :$proper
     );
   }
   method AT-POS (\k) {
@@ -114,7 +119,8 @@ class GSK::Node::Container:ver<4> is GSK::RenderNode:ver<4> {
 INIT {
   my \O = GSK::Node::Container;
   %render-node-types<Container> = {
-    object => O,
-    type   => O.get_type
+    object    => O,
+    node-type => GSK_CONTAINER_NODE,
+    pair      => O.getTypePair
   }
 }
