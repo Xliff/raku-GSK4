@@ -41,3 +41,15 @@ class GskShadow       is repr<CStruct> does GLib::Roles::Pointers is export {
   has gfloat  $.dy     is rw;
   has gfloat  $.radius is rw;
 }
+
+class GskPPContour     is repr<CStruct> does GLib::Roles::Pointers is export {
+  has gsize  $.contour;
+  has gsize  $.idx;
+  has gfloat $.t;
+}
+
+class GskPathPoint     is repr<CUnion> does GLib::Roles::Pointers is export {
+  HAS GskPPContour    $.contour;
+  HAS gpointer        @.padding[8] is CArray;
+  HAS graphene_vec4_t $.alignment;
+};
