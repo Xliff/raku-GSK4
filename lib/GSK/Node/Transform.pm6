@@ -55,15 +55,29 @@ class GSK::Node::Transform:ver<4> is GSK::RenderNode:ver<4> {
     $gsk-transform-node ?? self.bless( :$gsk-transform-node ) !! Nil
   }
 
-  method get_child ( :$raw = False ) is also<get-child> {
-    propReturnObject(
+  method get_child (
+    :quick(:$fast)  = False,
+    :$raw           = False,
+    :slow(:$proper) = $fast.not
+  )
+    is also<
+      get-child
+      child
+    >
+  {
+    returnProperNode(
       gsk_transform_node_get_child($!gsk-tn),
-      $raw,
-      |GSK::RenderNode.getTypePair
+      :$raw,
+      :$proper
     );
   }
 
-  method get_transform ( :$raw = False ) is also<get-transform> {
+  method get_transform ( :$raw = False )
+    is also<
+      get-transform
+      transform
+    >
+  {
     propReturnObject(
       gsk_transform_node_get_transform($!gsk-tn),
       $raw,
@@ -81,8 +95,9 @@ class GSK::Node::Transform:ver<4> is GSK::RenderNode:ver<4> {
 
 INIT {
   my \O = GSK::Node::Transform;
-  %render-node-types<Transform> = {
-    object => O,
-    type   => O.get_type
+  %render-node-types{ O.get_type } := %render-node-types<Transform> = {
+    object    => O,
+    node-type => GSK_TRANSFORM_NODE,
+    pair      => O.getTypePair
   }
 }
