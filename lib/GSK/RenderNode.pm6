@@ -14,6 +14,8 @@ use GLib::Roles::Object;
 our %render-node-types is export;
 
 class GSK::RenderNode:ver<4> {
+  also does GLib::Roles::Implementor;
+  
   has GskRenderNode $!gsk-rn is implementor;
 
   submethod BUILD (:$gsk-render-node ) {
@@ -62,8 +64,20 @@ class GSK::RenderNode:ver<4> {
     gsk_render_node_get_bounds($!gsk-rn, $bounds);
   }
 
-  method get_node_type is also<get-node-type> {
-    gsk_render_node_get_node_type($!gsk-rn);
+  proto method get_node_type (|)
+    is also<get-node-type>
+  { * }
+
+  multi method get_node_type
+    is also<
+      node_type
+      node-type
+    >
+  {
+    ::?CLASS.get_node_type($!gsk-rn);
+  }
+  multi method get_node_type (GskRenderNode $node) is static {
+    gsk_render_node_get_node_type($node);
   }
 
   method get_type is also<get-type> {
@@ -110,9 +124,28 @@ class GSK::RenderNode:ver<4> {
 
 }
 
+sub returnProperNode (
+  GskRenderNode  $node,
+                :quick(:$fast)  = False,
+                :$raw           = False,
+                :slow(:$proper) = $fast.not
+)
+  is export
+{
+  if $proper {
+    for %render-node-types.values {
+      next unless .<node-type>;
+
+      return propReturnObject($node, $raw, |.<pair>)
+        if GSK::RenderNode.get_node_type($node) == .<node-type>;
+    }
+  }
+  return propReturnObject($node, $raw, |%render-node-types<Render><pair>);
+}
+
 INIT {
   %render-node-types<Render> = {
-    object => GSK::RenderNode,
-    type   => GSK::RenderNode.get_type
+    object    => GSK::RenderNode,
+    pair      => GSK::RenderNode.getTypePair
   }
 }
