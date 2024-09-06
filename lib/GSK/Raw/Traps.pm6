@@ -1,3 +1,8 @@
 ### /usr/src/gtk4/gsk/gsk.h
 ### /usr/src/gtk4/gsk/gskenums.h
 ### /usr/src/gtk4/gsk/gsktypes.h
+### /usr/src/gtk4/gsk/broadway/gskbroadwayrenderer.h
+### /usr/src/gtk4/gsk/vulkan/gskvulkanrenderer.h
+### /usr/src/gtk4/gsk/gl/gskglrenderer.h
+### /usr/src/gtk4/gsk/gl/inlinearray.h
+### /usr/src/gtk4/gsk/gl/stb_rect_pack.h
