@@ -52,6 +52,14 @@ our enum GskGLUniformTypeEnum is export <
   GSK_GL_UNIFORM_TYPE_VEC4
 >;
 
+constant GskPathDirection is export := guint32;
+our enum GskPathDirectionEnum is export <
+  GSK_PATH_FROM_START
+  GSK_PATH_TO_START
+  GSK_PATH_TO_END
+  GSK_PATH_FROM_END
+>;
+
 our constant GskPathForeachFlags is export := guint32;
 our enum GskPathForeachFlagsEnum is export (
   GSK_PATH_FOREACH_ALLOW_ONLY_LINES => 0,
