@@ -35,7 +35,6 @@ class GskOutsetShadowNode            is repr<CPointer> does GLib::Roles::Pointer
 class GskPath                        is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskPathBuilder                 is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskPathMeasure                 is repr<CPointer> does GLib::Roles::Pointers is export { }
-class GskPathPoint                   is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskRadialGradientNode          is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskRepeatNode                  is repr<CPointer> does GLib::Roles::Pointers is export { }
 class GskRepeatingLinearGradientNode is repr<CPointer> does GLib::Roles::Pointers is export { }
