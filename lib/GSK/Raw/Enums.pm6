@@ -52,6 +52,20 @@ our enum GskGLUniformTypeEnum is export <
   GSK_GL_UNIFORM_TYPE_VEC4
 >;
 
+our constant GskLineCap is export := guint32;
+our enum GskLineCapEnum is export <
+  GSK_LINE_CAP_BUTT
+  GSK_LINE_CAP_ROUND
+  GSK_LINE_CAP_SQUAR
+>;
+
+our constant GskLineJoin is export := guint32;
+our enum GskLineJoinEnum is export <
+  GSK_LINE_JOIN_MITER
+  GSK_LINE_JOIN_ROUND
+  GSK_LINE_JOIN_BEVEL
+>;
+
 constant GskPathDirection is export := guint32;
 our enum GskPathDirectionEnum is export <
   GSK_PATH_FROM_START
