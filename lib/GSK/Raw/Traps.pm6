@@ -6,3 +6,4 @@
 ### /usr/src/gtk4/gsk/gl/gskglrenderer.h
 ### /usr/src/gtk4/gsk/gl/inlinearray.h
 ### /usr/src/gtk4/gsk/gl/stb_rect_pack.h
+### /usr/src/gtk4/gsk/gpu/gskgpurenderer.h
