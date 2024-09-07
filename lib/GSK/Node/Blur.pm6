@@ -17,8 +17,8 @@ class GSK::Node::Blur:ver<4> is GSK::RenderNode:ver<4> {
 
   has GskBlurNode $!gsk-bn is implementor;
 
-  submethod BUILD ( :$gsk-transform-node ) {
-    self.setGskBlurNode($gsk-transform-node) if $gsk-transform-node
+  submethod BUILD ( :$gsk-blur-node ) {
+    self.setGskBlurNode($gsk-blur-node) if $gsk-blur-node
   }
 
   method setGskBlurNode (GskBlurNodeAncestry $_) {
@@ -42,10 +42,10 @@ class GSK::Node::Blur:ver<4> is GSK::RenderNode:ver<4> {
     is also<GskBlurNode>
   { $!gsk-bn }
 
-  multi method new (GskBlurNodeAncestry $gsk-transform-node, :$ref = True) {
-    return unless $gsk-transform-node;
+  multi method new (GskBlurNodeAncestry $gsk-blur-node, :$ref = True) {
+    return unless $gsk-blur-node;
 
-    my $o = self.bless( :$gsk-transform-node );
+    my $o = self.bless( :$gsk-blur-node );
     $o.ref if $ref;
     $o;
   }
