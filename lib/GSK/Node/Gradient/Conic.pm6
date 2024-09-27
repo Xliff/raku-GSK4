@@ -43,6 +43,9 @@ class GSK::Node::Gradient::Conic:ver<4> is GSK::RenderNode:ver<4> {
     is also<GskConicGradientNode>
   { $!gsk-cgn }
 
+  proto method new (|)
+  { * }
+
   multi method new (
     GskConicGradientNodeAncestry  $gsk-conic-gradient-node,
                                  :$ref                      = True
@@ -63,7 +66,7 @@ class GSK::Node::Gradient::Conic:ver<4> is GSK::RenderNode:ver<4> {
       $bounds,
       $center,
       $rotation,
-      GLib::Roles::TypedBuffer.new(@colors),
+      GLib::Roles::TypedBuffer[GskColorStop].new(@colors).p,
       @colors.elems
     );
   }
