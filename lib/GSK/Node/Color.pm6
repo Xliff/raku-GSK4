@@ -18,14 +18,11 @@ class GSK::Node::Color:ver<4> is GSK::RenderNode:ver<4> {
   has GskColorNode $!gsk-cn is implementor;
 
   submethod BUILD ( :$gsk-color-node ) {
-    say "BLD: { $gsk-color-node.gist }";
     self.setGskColorNode($gsk-color-node) if $gsk-color-node
   }
 
   method setGskColorNode (GskColorNodeAncestry $_) {
     my $to-parent;
-
-    say "B: { $_.gist }";
 
     $!gsk-cn = do {
       when GskColorNode {
