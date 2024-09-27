@@ -263,7 +263,7 @@ sub gsk_conic_gradient_node_new (
   graphene_rect_t  $bounds,
   graphene_point_t $center,
   gfloat           $rotation,
-  GskColorStop     $color_stops,
+  gpointer         $color_stops,
   gsize            $n_color_stops
 )
   returns GskConicGradientNode
@@ -499,7 +499,7 @@ sub gsk_linear_gradient_node_new (
   graphene_rect_t  $bounds,
   graphene_point_t $start,
   graphene_point_t $end,
-  GskColorStop     $color_stops,
+  gpointer         $color_stops,
   gsize            $n_color_stops
 )
   returns GskRenderNode

@@ -21,7 +21,36 @@ class GskRoundedRect   is repr<CStruct> does GLib::Roles::Pointers is export {
 
 class GskColorStop     is repr<CStruct> does GLib::Roles::Pointers is export {
   has gfloat  $.offset is rw;
-  HAS GdkRGBA $.color;
+  HAS GdkRGBA $!color;
+
+  submethod BUILD ( :$!offset, :$color ) {
+    self.color = $color;
+  }
+
+  method color is rw {
+    Proxy.new:
+      FETCH => -> $               { $!color },
+      STORE => -> $, GdkRGBA() $c {
+        ( .red, .green, .blue, .alpha ) =
+          ( $c.red, $c.green, $c.blue, $c.alpha )
+        given $!color;
+      }
+  }
+
+  method gist {
+    qq:to/GIST/;
+      GskColorStop.new( offset => { $!offset }, color => { $!color.gist } )";
+      GIST
+  }
+
+  multi method new ( :$offset, :$color ) {
+    samewith($offset, $color);
+  }
+  multi method new (Num() $o, $color) {
+    my gfloat $offset = $o;
+
+    self.bless( :$offset, :$color )
+  }
 }
 
 class GskParseLocation is repr<CStruct> does GLib::Roles::Pointers is export {
