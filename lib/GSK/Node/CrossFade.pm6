@@ -59,9 +59,9 @@ class GSK::Node::CrossFade:ver<4> is GSK::RenderNode:ver<4> {
   ) {
     my gfloat $p = $progress;
 
-    my $gsk-cross-fade-node = gsk_cross_fade_node_new($start, $end, $p);
+    my $gsk-crossfade-node = gsk_cross_fade_node_new($start, $end, $p);
 
-    $gsk-cross-fade-node ?? self.bless( :$gsk-cross-fade-node ) !! Nil;
+    $gsk-crossfade-node ?? self.bless( :$gsk-crossfade-node ) !! Nil;
   }
 
   method get_end_child (
