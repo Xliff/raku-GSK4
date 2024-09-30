@@ -1,0 +1,24 @@
+{
+    "depends": [
+      "p6-GLib",
+      "p6-GIO",
+      "p6-ATK",
+    ],
+    "description": "Perl6 library bindings for GTK+ 4.0",
+    "version": "r0.2",
+    "meta-version": "0",
+    "license": "GPL-3.0",
+    "source-url": "https://github.com/Xliff/p6-GtkPlus",
+    "resources": [
+      "lib/linux/raku-shader.so",
+    ],
+    "provides": {
+
+    },
+    "name": "Raku-GSK4",
+    "perl": "6.c",
+    "test-depends": ["Test::META", "DateTime::Format"],
+    "build-depends": [ ],
+    "support": {"source": null},
+    "authors": ["clifton.wood@gmail.com"]
+}
